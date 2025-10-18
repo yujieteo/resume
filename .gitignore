@@ -1,0 +1,68 @@
+# ===========================
+# OS-specific files
+# ===========================
+.DS_Store
+Thumbs.db
+
+# ===========================
+# LaTeX build files
+# ===========================
+*.aux
+*.bbl
+*.blg
+*.brf
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.pdfsync
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdv
+
+# Latex intermediate directories
+latex.out/
+build/
+
+# ===========================
+# Backup / temp files
+# ===========================
+*~
+*.bak
+*.swp
+*.tmp
+*.old
+*.backup
+
+# ===========================
+# IDE / Editor specific
+# ===========================
+.vscode/
+.idea/
+*.code-workspace
+
+# ===========================
+# Python (if you have scripts)
+# ===========================
+__pycache__/
+*.pyc
+*.pyo
+
+# ===========================
+# Project-specific
+# ===========================
+# Ignore generated PDFs in /versions if needed
+# (uncomment if you don't want to track compiled PDFs)
+# versions/*.pdf
+
+# Ignore personal notes or drafts
+notes/
+drafts/
