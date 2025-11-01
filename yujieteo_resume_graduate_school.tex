@@ -1,0 +1,275 @@
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{bookmark}
+\usepackage{lastpage}
+
+% Sans-Serif
+%\usepackage[sfdefault]{FiraSans}
+%\usepackage[sfdefault]{roboto}
+%\usepackage[sfdefault]{noto-sans}
+%\usepackage[default]{sourcesanspro}
+
+% Serif
+\usepackage{CormorantGaramond}
+\usepackage{charter}
+
+% Colors
+% Use with \color{Name}
+% Can wrap entire heading with {\color{accent} [...] }
+\usepackage{xcolor}
+\definecolor{accentTitle}{HTML}{2c446f}
+\definecolor{accentText}{HTML}{2c446f}
+\definecolor{accentLine}{HTML}{2c446f}
+
+% Misc. Options
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\urlstyle{same}
+
+% Adjust Margins
+\addtolength{\oddsidemargin}{-0.7in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-0.7in}
+\addtolength{\textheight}{1.4in}
+
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\setlength{\tabcolsep}{0pt}
+\setlength{\footskip}{3.7pt}
+\raggedbottom
+\raggedright
+
+% ATS Readability
+\input{glyphtounicode}
+\pdfgentounicode=1
+
+%-----------------%
+% Custom Commands %
+%-----------------%
+
+% Centered title along with subtitle between HR
+% Usage: \documentTitle{Name}{Details}
+\newcommand{\documentTitle}[2]{
+  \begin{center}
+    {\Huge\color{accentTitle} #1}
+    \vspace{10pt}
+    {\color{accentLine} \hrule}
+    \vspace{2pt}
+    %{\footnotesize\color{accentTitle} #2}
+    \footnotesize{#2}
+    \vspace{2pt}
+    {\color{accentLine} \hrule}
+  \end{center}
+}
+
+% Create a footer with correct padding
+% Usage: \documentFooter{\thepage of X}
+\newcommand{\documentFooter}[1]{
+  \setlength{\footskip}{10.25pt}
+  \fancyfoot[C]{\footnotes占有率 #1}
+}
+
+% Simple wrapper to set up page numbering
+% Usage: \numberedPages
+% WARNING: Must run pdflatex twice!
+\newcommand{\numberedPages}{
+  \documentFooter{\thepage/\pageref{LastPage}}
+}
+
+% Section heading with horizontal rule
+% Usage: \section{Title}
+\titleformat{\section}{
+  \vspace{-5pt}
+  \color{accentText}
+  \raggedright\large\bfseries
+}{}{0em}{}[\color{accentLine}\titlerule]
+
+% Section heading with separator and content on same line
+% Usage: \tinysection{Title}
+\newcommand{\tinysection}[1]{
+  \phantomsection
+  \addcontentsline{toc}{section}{#1}
+  {\large{\bfseries\color{accentText}#1} {\color{accentLine} |}}
+}
+
+% Indented line with arguments left/right aligned in document
+% Usage: \heading{Left}{Right}
+\newcommand{\heading}[2]{
+  \hspace{10pt}#1\hfill#2\\
+}
+
+% Adds \textbf to \heading
+\newcommand{\headingBf}[2]{
+  \heading{\textbf{#1}}{\textbf{#2}}
+}
+
+% Adds \textit to \heading
+\newcommand{\headingIt}[2]{
+  \heading{\textit{#1}}{\textit{#2}}
+}
+
+% Template for itemized lists
+% Usage: \begin{resume_list} [items] \end{resume_list}
+\newenvironment{resume_list}{
+  \vspace{-7pt}
+  \begin{itemize}[itemsep=-2px, parsep=1pt, leftmargin=30pt]
+}{
+  \end{itemize}
+  %\vspace{-2pt}
+}
+
+% Formats an item to use as an itemized title
+% Usage: \itemTitle{Title}
+\newcommand{\itemTitle}[1]{
+  \item[] \underline{#1}\vspace{4pt}
+}
+
+% Bullets used in itemized lists
+\renewcommand\labelitemi{--}
+
+%% END_FILE: mteck.sty
+%%%%%%%%%%%%%%%
+
+
+%\numberedPages % NOTE: lastpage requires a second build
+%\documentFooter{\thepage of 2} % Does similar without using lastpage
+\begin{document}
+
+  %---------%  
+  % Heading %
+  %---------%
+
+  \documentTitle{Teo Yu Jie}{
+    % Web Version
+    %\raisebox{-0.05\height} \faPhone\ [redacted - web copy] ~
+    %\raisebox{-0.15\height} \faEnvelope\ [redacted - web copy] ~
+    %%
+    \href{tel:8332 4860}{
+      \raisebox{-0.05\height} 8332 4860} ~ | ~
+    \href{mailto:yujie@protonmail.com}{
+      \raisebox{-0.15\height} yujie@protonmail.com} ~ | ~
+    \href{https://www.linkedin.com/in/yujieteo/}{
+      \raisebox{-0.15\height} linkedin.com/in/yujieteo/} ~ | ~
+    \href{https://github.com/yujieteo?tab=repositories}{
+      \raisebox{-0.15\height} https://github.com/yujieteo?tab=repositories}
+  }
+
+  %---------%  
+  % Summary %
+  %---------%
+
+  \tinysection{Research Interests}
+  \begin{resume_list}
+    \item PhD candidate pursuing research at the intersection of machine learning, computational mechanics, and aerospace engineering.
+    \item Interested in developing novel computational methods for engineering applications, with focus on ML-driven optimization and uncertainty quantification.
+    \item Committed to advancing scientific understanding through interdisciplinary research combining physics-based modeling with data-driven approaches.
+  \end{resume_list}
+
+    %--------%
+  % Skills %
+  %--------%
+
+\section{Technical Skills}
+
+\begin{tabular}{@{}ll}
+\textbf{Research Methods} &  Statistical analysis, computational modeling, experimental design, data validation \\
+\textbf{Programming} & Python, MATLAB, Mathematica, C, C\#, statistical computing, scientific computing \\
+\textbf{Machine Learning} & PyTorch, tinygrad, NumPy, SciPy, pandas, GANs, decision trees, neural networks \\
+\textbf{Mathematical Tools} & Linear algebra, representation theory, probability theory, information theory, optimization \\
+\textbf{Computational Software} & PyANSYS, ABAQUS, Ansys APDL, Patran/NASTRAN, simulation analysis \\
+\textbf{Academic Tools} & LaTeX, mathematical modeling, experimental validation, reproducible research \\
+\textbf{Systems} & Linux, Gentoo, OpenBSD, Fedora \\
+\textbf{Soft Skills} & Academic writing, cross-disciplinary collaboration, research presentation
+\end{tabular}
+
+  %------------%
+  % Experience %
+  %------------%
+
+  \section{Research Experience}
+
+  \headingBf{ST Engineering}{Jan 2024 -- Present}
+  \headingIt{Research Engineer (Computational Mechanics, Optimization)}{}
+  \begin{resume_list}
+    \item Conducted research on machine learning applications in computational mechanics, developing novel approaches for parameter sensitivity analysis in engineering systems.
+    \item Investigated decision tree learning methods for understanding complex engineering design relationships, contributing to optimization strategies.
+    \item Researched automated analysis workflows to accelerate engineering research processes, developing scalable computational frameworks.
+    \item Collaborated with cross-functional teams to translate research findings into practical engineering applications and solutions.
+  \end{resume_list}
+
+  \headingBf{Advanced Micro Devices ("AMD")}{Jan 2023 -- May 2023}
+  \headingIt{Research Intern (Computational Materials Science)}{}
+  \begin{resume_list}
+    \item Investigated generative adversarial networks (GANs) for materials modeling, developing novel surrogate modeling approaches that achieved significant computational improvements.
+    \item Researched automated ML pipelines for engineering simulations, contributing to open-source computational frameworks for the research community.
+    \item Studied experimental validation methodologies for machine learning models in engineering contexts, developing reproducible research protocols.
+  \end{resume_list}
+
+  %-----------%
+  % Education %
+  %-----------%
+
+  \section{Education}
+
+  \headingBf{Nanyang Technological University, Singapore}{} % Note: Adding year(s) exposes an implied age
+  \headingIt{Bachelor of Engineering (Aerospace)}{}
+  \headingIt{Specialisation in Mechanical Engineering, Honours (Highest Distinction), Accelerated Bachelor's}{}
+  \headingIt{Relevant Coursework: Applied Mathematics, Statistics, Computational Methods, Materials Science}{}
+
+  %----------------------------%
+  % Extracurricular Activities %
+  %----------------------------%
+
+  \section{Research Projects}
+
+  \headingBf{Computational Mathematics Research}{Jan 2024 -- Present}
+  \begin{resume_list}
+    \item Independent research on Monte Carlo methods, Markov chains, and advanced probability theory with applications to engineering uncertainty quantification.
+    \item Developing mathematical frameworks for probabilistic modeling in complex engineering systems and contributing to theoretical foundations.
+  \end{resume_list}
+
+  \headingBf{Computational Materials Science Research}{Jan 2023 -- Dec 2023}
+  \begin{resume_list}
+    \item Researched parametric modeling approaches for advanced materials using computational intelligence and mathematical optimization.
+    \item Investigated fracture mechanics through computational simulation, developing novel methodologies for predicting material behavior under complex loading conditions.
+    \item Developed modified phase field methodologies enhanced with computational optimization for materials property prediction and analysis.
+  \end{resume_list}
+
+  %------------------------%
+  % Research Competencies %
+  %------------------------%
+
+  \section{Research Competencies}
+  
+  \begin{resume_list}
+    \item \textbf{Computational Research:} Numerical methods, finite element analysis, simulation validation, computational optimization
+    \item \textbf{Statistical Analysis:} Hypothesis testing, experimental design, uncertainty quantification, statistical modeling
+    \item \textbf{Interdisciplinary Research:} Physics-based modeling, data-driven approaches, engineering applications, mathematical foundations
+    \item \textbf{Research Methodology:} Literature review, experimental validation, reproducible research, academic writing, presentation skills
+  \end{resume_list}
+
+  %------------------------%
+  % Academic Achievements %
+  %------------------------%
+
+  \section{Academic Achievements}
+  
+  \begin{resume_list}
+    \item \textbf{Academic Excellence:} Honours (Highest Distinction) in accelerated Bachelor's program
+    \item \textbf{Research Contributions:} Open-source ML pipelines and computational frameworks contributing to scientific community
+    \item \textbf{Interdisciplinary Training:} Combination of engineering, mathematics, and computer science expertise
+    \item \textbf{Collaborative Research:} Experience working across engineering disciplines with strong communication skills
+  \end{resume_list}
+
+\end{document}

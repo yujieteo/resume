@@ -1,0 +1,260 @@
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{bookmark}
+\usepackage{lastpage}
+
+% Sans-Serif
+%\usepackage[sfdefault]{FiraSans}
+%\usepackage[sfdefault]{roboto}
+%\usepackage[sfdefault]{noto-sans}
+%\usepackage[default]{sourcesanspro}
+
+% Serif
+\usepackage{CormorantGaramond}
+\usepackage{charter}
+
+% Colors
+% Use with \color{Name}
+% Can wrap entire heading with {\color{accent} [...] }
+\usepackage{xcolor}
+\definecolor{accentTitle}{HTML}{2c446f}
+\definecolor{accentText}{HTML}{2c446f}
+definecolor{accentLine}{HTML}{2c446f}
+
+% Misc. Options
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+renewcommand{\headrulewidth}{0pt}
+renewcommand{\footrulewidth}{0pt}
+urlstyle{same}
+
+% Adjust Margins
+addtolength{\oddsidemargin}{-0.7in}
+addtolength{\evensidemargin}{-0.5in}
+addtolength{\textwidth}{1.19in}
+addtolength{\topmargin}{-0.7in}
+addtolength{\textheight}{1.4in}
+
+setlength{\multicolsep}{-3.0pt}
+setlength{\columnsep}{-1pt}
+setlength{\tabcolsep}{0pt}
+setlength{\footskip}{3.7pt}
+raggedbottom
+raggedright
+
+% ATS Readability
+input{glyphtounicode}
+pdfgentounicode=1
+
+%-----------------%
+% Custom Commands %
+%-----------------%
+
+% Centered title along with subtitle between HR
+% Usage: \documentTitle{Name}{Details}
+\newcommand{\documentTitle}[2]{
+  begin{center}
+    {Huge\color{accentTitle} #1}
+    vspace{10pt}
+    {color{accentLine} hrule}
+    vspace{2pt}
+    %{footnotes占有率color{accentTitle} #2}
+    footnotesize{#2}
+    vspace{2pt}
+    {color{accentLine} hrule}
+  end{center}
+}
+
+% Create a footer with correct padding
+% Usage: \documentFooter{\thepage of X}
+\newcommand{\documentFooter}[1]{
+  setlength{\footskip}{10.25pt}
+  fancyfoot[C]{footnotesize #1}
+}
+
+% Simple wrapper to set up page numbering
+% Usage: \numberedPages
+% WARNING: Must run pdflatex twice!
+\newcommand{\numberedPages}{
+  \documentFooter{\thepage/\pageref{LastPage}}
+}
+
+% Section heading with horizontal rule
+% Usage: \section{Title}
+\titleformat{\section}{
+  vspace{-5pt}
+  color{accentText}
+  raggedright\large\bfseries
+{}{0em}{}[\color{accentLine}\titlerule]
+
+% Section heading with separator and content on same line
+% Usage: \tinysection{Title}
+\newcommand{\tinysection}[1]{
+  phantomsection
+  addcontentsline{toc}{section}{#1}
+  {large{\bfseries\color{accentText}#1} {color{accentLine} |}}
+}
+
+% Indented line with arguments left/right aligned in document
+% Usage: \heading{Left}{Right}
+\newcommand{\heading}[2]{
+  hspace{10pt}#1hfill#2\\
+}
+
+% Adds \textbf to \heading
+\newcommand{\headingBf}[2]{
+  heading{\textbf{#1}}{\textbf{#2}}
+}
+
+% Adds \textit to \heading
+\newcommand{\headingIt}[2]{
+  heading{\textit{#1}}{\textit{#2}}
+}
+
+% Template for itemized lists
+% Usage: \begin{resume_list} [items] \end{resume_list}
+\newenvironment{resume_list}{
+  vspace{-7pt}
+  begin{itemize}[itemsep=-2px, parsep=1pt, leftmargin=30pt]
+}{
+  end{itemize}
+  %\vspace{-2pt}
+}
+
+% Formats an item to use as an itemized title
+% Usage: \itemTitle{Title}
+\newcommand{\itemTitle}[1]{
+  item[] underline{#1}vspace{4pt}
+}
+
+% Bullets used in itemized lists
+renewcommand\labelitemi{--}
+
+%% END_FILE: mteck.sty
+%%%%%%%%%%%%%%%
+
+
+%\numberedPages % NOTE: lastpage requires a second build
+%\documentFooter{\thepage of 2} % Does similar without using lastpage
+\begin{document}
+
+  %---------%  
+  % Heading %
+  %---------%
+
+  \documentTitle{Teo Yu Jie}{
+    % Web Version
+    %\raisebox{-0.05\height} \faPhone\ [redacted - web copy] ~
+    %\raisebox{-0.15\height} \faEnvelope\ [redacted - web copy] ~
+    %%
+    href{tel:8332 4860}{
+      raisebox{-0.05\height} 8332 4860} ~ | ~
+    href{mailto:yujie@protonmail.com}{
+      raisebox{-0.15\height} yujie@protonmail.com} ~ | ~
+    href{https://www.linkedin.com/in/yujieteo/}{
+      raisebox{-0.15\height} linkedin.com/in/yujieteo/} ~ | ~
+    href{https://github.com/yujieteo?tab=repositories}{
+      raisebox{-0.15\height} https://github.com/yujieteo?tab=repositories}
+  }
+
+  %---------%  
+  % Summary %
+  %---------%
+
+  \tinysection{Summary}
+  \begin{resume_list}
+    item Software Engineer with expertise in automation, data pipelines, and machine learning systems development.
+    item Experienced in building scalable software solutions, integrating APIs, and developing cross-platform automation tools.
+    item Skilled in full-stack development and DevOps practices, improving system efficiency by 99.5\% through optimization and automation.
+  end{resume_list}
+
+    %--------%
+  % Skills %
+  %--------%
+
+\section{Skills}
+
+\begin{tabular}{@{}ll}
+\textbf{Programming Languages} &  Python, C\#, C, Golang, MATLAB, Mathematica \\
+\textbf{Automation Tools} & PowerShell, Microsoft Office API integration, workflow automation \\
+\textbf{Data Engineering} & NumPy, SciPy, pandas, PyTorch, data pipeline development \\
+\textbf{APIs \& Integration} & REST APIs, data workflows, cross-platform integration \\
+\textbf{Development Tools} & Git, Linux systems, open source development \\
+\textbf{Machine Learning} & PyTorch, tinygrad, GANs, decision trees, statistical analysis \\
+\textbf{Systems} & Linux, Gentoo, OpenBSD, Fedora \\
+\textbf{Soft Skills} & Cross-functional collaboration, technical communication, systems thinking
+\end{tabular}
+
+  %------------%
+  % Experience %
+  %------------%
+
+  \section{Experience}
+
+  \headingBf{ST Engineering}{Jan 2024 -- Present}
+  \headingIt{Software Engineer (Automation, Data Integration)}{}
+  begin{resume_list}
+    item Developed C\#/Powershell automation suite integrating with Microsoft Word/Excel/PowerPoint APIs, creating scalable workflow solutions that reduced processing time from several months to 1 week.
+    item Built data processing pipelines and automated report generation systems, enabling team to meet critical deadlines through software-driven efficiency improvements.
+    item Led technical integration discussions with cross-functional teams (mechanical, electrical, supply chain) to develop software solutions for global engineering programs.
+    item Implemented backpropagation algorithms and statistical analysis tools for optimizing design workflows through machine learning applications.
+  end{resume_list}
+
+  \headingBf{Advanced Micro Devices ("AMD")}{Jan 2023 -- May 2023}
+  \headingIt{Software Developer and Data Engineering Intern}{}
+  begin{resume_list}
+    item Built Python-based data processing pipelines integrating PyANSYS simulations with machine learning workflows, developing open source automation tools that reduced computation time by 99.5\%.
+    item Developed data visualization and architectural workflow systems, saving over 300 man-hours within 2 months through automated data pipeline development.
+    item Created standardized data processing workflows using Python and Golang, enabling reproducible experiments and scalable data-driven solutions.
+  end{resume_list}
+
+  %-----------%
+  % Education %
+  %-----------%
+
+  \section{Education}
+
+  \headingBf{Nanyang Technological University, Singapore}{} % Note: Adding year(s) exposes an implied age
+  \headingIt{Aerospace Engineering}{}
+  \headingIt{Specialisation in Computational Methods, Honours (Highest Distinction), Accelerated Bachelor's}{}
+
+  %----------------------------%
+  % Extracurricular Activities %
+  %----------------------------%
+
+  \section{Software Projects}
+
+  \headingBf{Automation and Data Processing Systems}{Jan 2024 -- Present}
+  begin{resume_list}
+    item Developed Mathematica applications for computational modeling, focusing on Monte Carlo simulation and statistical analysis algorithms.
+  end{resume_list}
+
+  \headingBf{Open Source Data Engineering}{Jan 2023 -- Dec 2023}
+  begin{resume_list}
+    item Built parametric data processing models using advanced computational methods, integrating data visualization with machine learning pipelines.
+    item Developed data processing workflows for scientific simulation, creating automated data validation and analysis systems.
+    item Implemented modified computational methodologies for data processing, developing efficient algorithms for scientific data analysis.
+  end{resume_list}
+
+  %------------------------%
+  % Technical Competencies %
+  %------------------------%
+
+  \section{Technical Competencies}
+  
+  begin{resume_list}
+    item \textbf{Software Development:} Full-stack development, API design, database integration, object-oriented programming
+    item \textbf{Automation Systems:} Workflow automation, scheduled task management, cross-platform integration
+    item \textbf{Data Engineering:} ETL pipelines, data transformation, real-time data processing, data visualization
+    item \textbf{Machine Learning Operations:} Model deployment, MLOps, statistical analysis, algorithm optimization
+  end{resume_list}
+
+\end{document}
